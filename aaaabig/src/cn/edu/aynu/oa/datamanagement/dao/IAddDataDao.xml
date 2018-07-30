@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.aynu.oa.datamanagement.dao.IAddDataDao">
+	
+	<insert id="insertData">
+		insert into dataManagement(name,mark,age,gender,belong,test_time,warning_level,testTime) values(#{name},
+										#{mark},#{age},#{gender},#{belong},#{test_time},#{warning_level},#{testTime})
+	</insert>
+
+	<delete id="deleteData">
+		delete from dataManagement where id=#{id}
+	</delete>
+	
+	<select id="selectAllRows" resultType="long">
+		select count(id) from dataManagement 
+	</select>
+	
+	<select id="selectCurrentPageColumn" resultMap="ColumnMap">
+		select id, name,mark,age,gender,belong,test_time,warning_level,testTime from dataManagement
+		<where>
+				<if test="pid > 0">
+					and pid = #{pid}
+				</if>
+			</where>
+		 limit #{pageStartIndex},#{pageSize}
+	</select>
+	<resultMap type="DataManagement" id="ColumnMap">
+		<id column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="mark" property="mark"/>
+		<result column="age" property="age"/>
+		<result column="gender" property="gender"/>
+		<result column="belong" property="belong"/>
+		<result column="test_time" property="test_time"/>
+		<result column="warning_level" property="warning_level"/>
+		<result column="testTime" property="testTime"/>
+	</resultMap>
+		
+		<select id="findById" resultType="DataManagement">
+			select id, name,mark,age,gender,belong,test_time,warning_level,testTime from dataManagement where id=#{pid}
+		</select>
+	
+	
+</mapper>

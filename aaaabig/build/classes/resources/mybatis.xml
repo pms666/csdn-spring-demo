@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<!-- 注册别名 -->
+	<typeAliases>
+		<package name="cn.edu.aynu.oa.commons.beans"/>	
+	</typeAliases>
+	
+	<!-- 注册映射文件 ，dao下具有多层模块 **点灯解决，可以匹配多级，一个*表示一级-->
+	<!-- <mappers>
+		<package name="com.abc.dao"/>
+	</mappers> -->
+</configuration>

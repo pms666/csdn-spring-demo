@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.aynu.oa.user.dao.IUserManagerDao">
+	
+
+	
+	<select id="selectCurrentPgaeUser" resultType="User">
+		select id, name, password, userRows,sex,date
+		from user limit #{pageStartIndex}, #{pageSize}
+		
+	</select>
+	
+	<select id="selectTotalRows" resultType="long">
+		select count(id) from user 
+	
+	</select>
+
+
+	<insert id="insertUser">
+		insert into user (name, password, sex, userRows, date)
+		values (#{name}, #{password}, #{sex}, #{userRows}, #{date} )
+	</insert>
+	
+	<delete id="deleteById">
+		delete from user where id= #{xxx}
+	
+	</delete>
+	
+	<delete id="deleteUserById">
+		delete from user where id= #{xxx}
+	
+	</delete>
+	
+	<select id="selectUserById" resultType="user">
+		select id, name, password, userRows,sex,date,filesrc from user where id=#{xxx}
+	</select>
+	
+	<update id="updateUser">
+	
+		update user set name =#{name}, password=#{password}, userRows=#{userRows}, sex=#{sex},
+		date=#{date} where id= #{id}
+	</update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

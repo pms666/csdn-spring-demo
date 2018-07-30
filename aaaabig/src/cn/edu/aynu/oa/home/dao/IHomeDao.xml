@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.aynu.oa.home.dao.IHomeDao">
+
+	
+	<select id="selectCurrentPgaeHome" resultType="Home">
+		select id,gid,topic,time,filesrc,content,status
+		from home limit #{pageStartIndex}, #{pageSize}
+		
+	</select>
+	<select id="selectTotalRows" resultType="long">
+		select count(id) from  home 
+	
+	</select>
+	
+
+	<insert id="insertHome" parameterType="Home">
+		insert into
+		home(id,gid,topic,time,filesrc,content,status)values(#{id},#{gid},#{topic},#{time},#{filesrc},#{content},#{status})
+	</insert>
+	<select id="selectAllGenre" resultType="Genre">
+		select gid,gname from genre 
+	</select>
+	
+	<select id="selectGenreBygid" resultType="Genre">
+		select gid,gname from genre where gid=#{xxx}
+	</select>
+	<resultMap type="Home" id="HomeMap">
+		<id column="id" property="id"/>
+		<result column="gid" property="gid"/>
+		<result column="topic" property="topic"/>
+		<result column="time" property="time"/>
+		<result column="filesrc" property="filesrc"/>
+		<result column="content" property="content"/>
+		<result column="status" property="status"/>
+		<association property="genre" 
+					 javaType="Genre"
+					 select="selectGenreBygid"
+					 column="gid"
+		/>
+	</resultMap>
+	
+	<select id="selectAll" resultMap="HomeMap">
+		select id,topic, filesrc,time,content,status,gid from home 
+	</select>
+	<delete id="deleteHome">
+		delete  from home where id=#{xxx}
+	</delete>
+</mapper>
